@@ -8,7 +8,11 @@ export default {
     extend: {
       backgroundImage: {
         'hero': "url('./src/assets/images/hero.svg')",
-      }
+      },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
+      },
     },
   },
   plugins: [],
