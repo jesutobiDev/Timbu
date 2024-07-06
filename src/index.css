@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    font-family: "Inter", sans-serif;
+}
+.preloader-text {
+    background-image: url("./assets/images/hero.svg");
+    background-repeat: repeat;
+    background-position: 50%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-font-smoothing: antialiased;
+  }
+  
