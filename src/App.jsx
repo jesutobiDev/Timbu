@@ -18,7 +18,6 @@ const App = () => {
       document.body.classList.remove('overflow-hidden');
     }
     
-    // Cleanup function to reset overflow style when component unmounts
     return () => {
       document.body.classList.remove('overflow-hidden');
     };

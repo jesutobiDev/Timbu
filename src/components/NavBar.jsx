@@ -6,7 +6,7 @@ const NavBar = ({handleToggleNav, toggleNav}) => {
   return (
     <div className="w-full h-auto relative p-5 md:p-0 md:flex md:gap-10 md:px-[50px] md:py-5 font-poppins">
         <div className='w-full md:w-auto flex justify-between items-center h-20 md:h-16'>
-            <p className="text-[#F3F2E8] text-[45px] font-semibold">Timbu</p>
+            <p className="text-[#F3F2E8] text-[42px] font-semibold">Timbu</p>
             <TfiMenu  className='h-[40px] w-[40px] opacity-50  md:hidden'  onClick={handleToggleNav} />
         </div>
         <div className={`bg-darkViolet md:bg-transparent md:items-center  absolute md:static top-[100px] overflow-hidden md:overflow-auto w-[90%] md:w-auto md:flex-1 md:h-auto transition-all duration-500 ease rounded-2xl md:rounded-none text-white md:text-gray  cursor-pointer font-light text-2xl md:text-lg flex flex-col md:flex-row  md:justify-between gap-10 md:gap-0 z-10 ${toggleNav ? 'h-[470px] p-10' : 'h-0'}`}>
