@@ -9,10 +9,10 @@ import outdoors from "../../assets/icons/outdoors.svg";
 
 const SideNav = () => {
     const [filters, setFilters] = useState([
-        { name: 'Chair', icon: chair, clicked: true },
+        { name: 'Chair', icon: chair, clicked: false },
         { name: 'Sofa', icon: sofa, clicked: false },
         { name: 'Table', icon: table, clicked: false },
-        { name: 'Rug', icon: rug, clicked: true },
+        { name: 'Rug', icon: rug, clicked: false },
         { name: 'Dresser', icon: dresser, clicked: false },
         { name: 'Outdoors', icon: outdoors, clicked: false },
     ]);
