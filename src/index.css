@@ -4,7 +4,8 @@
 @tailwind utilities;
 
 body{
-    font-family: "Inter", sans-serif;
+    font-family: "Poppins", sans-serif;
+    background-color: #F3F2E8;
 }
 .preloader-text {
     background-image: url("./assets/images/hero.svg");
@@ -14,4 +15,6 @@ body{
     -webkit-text-fill-color: transparent;
     -webkit-font-smoothing: antialiased;
   }
+
+  
   
