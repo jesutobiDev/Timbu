@@ -27,7 +27,7 @@ const Header = ({ handleToggleNav, toggleNav }) => {
               </div>
               <div className="text-[14px] font-semibold">EN</div>
               {/* <button className="bg-[#F3F2E8] text-black px-4 py-2 rounded-full font-semibold text-[14px]">Contact Us</button> */}
-              <Link to="/listings" className="bg-[#F3F2E8] text-black px-4 py-2 rounded-full font-semibold text-[14px]">
+              <Link to="/" className="bg-[#F3F2E8] text-[#121211] px-4 py-2 rounded-full font-semibold text-[14px]">
                 Contact Us
               </Link>
             </div>

@@ -1,33 +1,34 @@
 import React from 'react';
-import { useState } from "react";
+// import { useState } from "react";
 import products from "../../data";
+import { Link } from 'react-router-dom';
 
 const Discover = () => {
-    const [filters, setFilters] = useState([
-        { name: 'All Products', clicked: true },
-        { name: 'Living Room', clicked: false },
-        { name: 'Bedroom', clicked: false },
-        { name: 'Outdoor', clicked: false },
-    ]);
+    // const [filters, setFilters] = useState([
+    //     { name: 'All Products', clicked: true },
+    //     { name: 'Living Room', clicked: false },
+    //     { name: 'Bedroom', clicked: false },
+    //     { name: 'Outdoor', clicked: false },
+    // ]);
 
-    const handleFilterClick = (filterName) => {
-        setFilters(filters.map(filter => ({
-            ...filter,
-            clicked: filter.name === filterName
-        })));
-    };
+    // const handleFilterClick = (filterName) => {
+    //     setFilters(filters.map(filter => ({
+    //         ...filter,
+    //         clicked: filter.name === filterName
+    //     })));
+    // };
 
-    const activeFilter = filters.find(filter => filter.clicked).name;
+    // const activeFilter = filters.find(filter => filter.clicked).name;
 
-    const filteredProducts = activeFilter === 'All Products'
-        ? products
-        : products.filter(product => product.category === activeFilter);
+    // const filteredProducts = activeFilter === 'All Products'
+    //     ? products
+    //     : products.filter(product => product.category === activeFilter);
 
     return (
         <div className="m-5 md:m-0 md:mx-[50px] md:my-10">
-            <div className="flex justify-between text-[#121211]">
+            <div className="flex justify-between text-[#121211] items-center">
                 <p className="text-[42px] font-semibold w-1/2">Discover Unparalleled Furniture Designs</p>
-                <div className="flex gap-2 items-center flex-wrap">
+                {/* <div className="flex gap-2 items-center flex-wrap">
                     {filters.map((filter, index) => (
                         <div
                             key={index}
@@ -37,18 +38,26 @@ const Discover = () => {
                             {filter.name}
                         </div>
                     ))}
-                </div>
+                </div> */}
+                <Link to="/listings" className="bg-transparent text-[#121211]  border-[#121211] text-[14px] h-[40px] rounded-full items-center justify-center cursor-pointer transition-all duration-500 font-semibold border-[2px] p-4 flex gap-2">
+                    See All
+                </Link>
+
             </div>
-            <div className="flex gap-[50px] mt-[50px] overflow-x-auto ">
-                {filteredProducts.map((product, index) => (
-                    <div key={index}>
-                        <div className="w-[300px] h-[300px] rounded-[12px] overflow-hidden">
-                            <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
-                        </div>
-                        <p className="text-[#121211] font-semibold text-[20px] mt-2">{product.name}</p>
-                        <p className="font-semibold text-[#872009] text-[16px]">{product.price}</p>
-                    </div>
-                ))}
+            <div className="flex mt-[50px] justify-between">
+                {products.map((product, index) => {
+                    if (index < 3) {
+                        return (
+                            <div key={index}>
+                                <div className="w-[350px] h-[300px] rounded-[12px] overflow-hidden">
+                                    <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                                </div>
+                                <p className="text-[#121211] font-semibold text-[20px] mt-2">{product.name}</p>
+                                <p className="font-semibold text-[#872009] text-[16px]">{product.price}</p>
+                            </div>
+                        );
+                    }
+                })}
             </div>
         </div>
     );
