@@ -19,7 +19,7 @@ const Discover = () => {
                 {products.map((product, index) => {
                     if (index < 3) {
                         return (
-                            <Link to="" key={index}>
+                            <Link to={`/product/${product.id}`} key={index}>
                                 <div className="w-[350px] h-[300px] rounded-[12px] overflow-hidden">
                                     <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
                                 </div>

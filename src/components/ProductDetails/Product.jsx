@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import products from '../../data';
 import Cart from "../../assets/icons/black-cart.svg";
@@ -6,12 +6,16 @@ import { TfiMenu } from 'react-icons/tfi';
 import { Link } from "react-router-dom";
 import Arrow from "../../assets/icons/arrow-forward.svg";
 import Footer from "../Footer"
+import { CartContext } from '../Context/CartContext';
 
 const Product = ({ handleToggleNav, toggleNav }) => {
     const { id } = useParams();
     const product = products.find(p => p.id === parseInt(id));
     const [selectedColor, setSelectedColor] = useState(product.colorVariants[0].color);
     const [quantity, setQuantity] = useState(1);
+    const [activeSection, setActiveSection] = useState('details');
+    const { addToCart } = useContext(CartContext);
+    const { cart } = useContext(CartContext);
 
     if (!product) {
         return <p>Product not found</p>;
@@ -31,11 +35,40 @@ const Product = ({ handleToggleNav, toggleNav }) => {
         }
     };
 
-    const handleAddToCart = () => {
-        // Logic to add the product to the cart
-        console.log(`Added ${quantity} of ${product.name} in ${selectedColor} to cart`);
-        // Here you can add your logic to update the cart state or context
+
+    const handleAddToCart = ({ id, quantity, selectedColor }) => {
+        addToCart({ id, quantity, selectedColor });
     };
+    const numberOfCartItems = cart.length;
+
+    const renderSectionContent = () => {
+        switch (activeSection) {
+            case 'details':
+                return (
+                    <div className='flex gap-[20px] justify-between border-y-[2px] py-[40px]'>
+                        <p>{product.description}</p>
+                        <p>{product.availability}</p>
+                        <div className='flex gap-[15px] flex-col'>
+                            {product.characteristics.map((char, index) => (
+                                <div key={index} className='flex items-center gap-[10px] mb-2'>
+                                    <img src={char.icon} className='w-6 h-6' alt={char.icon_text} />
+                                    <p className='text-nowrap'>{char.icon_text}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                );
+            case 'specs':
+                return <ul>{product.specs.map((spec, index) => <li key={index}>{spec}</li>)}</ul>;
+            case 'reviews':
+                return <div>{product.reviews.map((review, index) => <p key={index}>{review}</p>)}</div>;
+            case 'warranty':
+                return <p>{product.warrantyInfo}</p>;
+            default:
+                return null;
+        }
+    };
+
 
     return (
         <div className="">
@@ -52,9 +85,14 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                     </ul>
                     <hr className='opacity-40' />
                     <div className="flex gap-[30px] items-center">
-                        <div>
-                            <img src={Cart} alt="cart" />
-                        </div>
+                    <Link to="/cart" className="relative">
+                        <img src={Cart} alt="cart" />
+                        {numberOfCartItems > 0 && (
+                            <div className="absolute top-0 right-0 -mt-1 -mr-2 bg-[#872009] rounded-full w-4 h-4 flex items-center justify-center text-[#F3F2E8] text-xs">
+                                {numberOfCartItems}
+                            </div>
+                        )}
+                    </Link>
                         <div className="text-[14px] font-semibold">EN</div>
                         <Link to="/listings" className="bg-[#121211] text-[#F3F2E8] px-4 py-2 rounded-full font-semibold text-[14px]">
                             Contact Us
@@ -87,7 +125,7 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                         </div>
                     </div>
                     <div className="flex gap-2 items-center">
-                        <h3 className="font-semibold text-[24px]">Quantity :</h3>
+                        <h3 className="font-semibold text-[24px]">Qty :</h3>
                         <div className="flex items-center gap-2">
                             <button
                                 className="border border-gray-400 p-2 rounded-full"
@@ -104,12 +142,13 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                             </button>
                         </div>
                     </div>
-                    <button
-                        className="bg-[#121211] text-[#F3F2E8] px-4 py-2 rounded-full font-semibold text-[14px] mt-4 w-fit flex gap-2"
-                        onClick={handleAddToCart}
+                    <div
+                        className="bg-[#121211] cursor-pointer text-[#F3F2E8] px-4 py-2 rounded-full font-semibold text-[14px] mt-4 w-fit flex gap-2"
+                        onClick={() => handleAddToCart({ id: product.id, quantity, selectedColor })}
                     >
-                        Add to Cart<span>{product.price}</span>
-                    </button>
+                        Add to Cart<span>${product.price}</span>
+                    </div>
+
                 </div>
                 <div>
                     <div className='w-[500px] h-[500px] rounded-[12px] object-cover overflow-hidden'>
@@ -117,13 +156,26 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                     </div>
                 </div>
             </div>
+
+            <div className="my-10 p-5 md:px-[50px] md:py-5">
+                <div className="flex gap-5 mb-5">
+                    <button className={`px-4 py-2 rounded-full ${activeSection === 'details' ? 'bg-[#121211] text-[#F3F2E8]' : 'bg-gray-200 text-gray-800'}`} onClick={() => setActiveSection('details')}>Details</button>
+                    <button className={`px-4 py-2 rounded-full ${activeSection === 'specs' ? 'bg-[#121211] text-[#F3F2E8]' : 'bg-gray-200 text-gray-800'}`} >Product Specs</button>
+                    <button className={`px-4 py-2 rounded-full ${activeSection === 'reviews' ? 'bg-[#121211] text-[#F3F2E8]' : 'bg-gray-200 text-gray-800'}`} >Reviews</button>
+                    <button className={`px-4 py-2 rounded-full ${activeSection === 'warranty' ? 'bg-[#121211] text-[#F3F2E8]' : 'bg-gray-200 text-gray-800'}`} >Warranty Info</button>
+                </div>
+                <div className=" p-5 rounded-lg">
+                    {renderSectionContent()}
+                </div>
+            </div>
+
             <div className="m-5 md:m-0 md:mx-[50px] md:my-20">
                 <p className="text-[32px] font-semibold">Other products you might like</p>
                 <div className="flex mt-[30px] justify-between">
                     {products.map((product, index) => {
                         if (index < 3) {
                             return (
-                                <Link to="" key={index}>
+                                <Link to={`/product/${product.id}`} key={index}>
                                     <div className="w-[350px] h-[300px] rounded-[12px] overflow-hidden">
                                         <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
                                     </div>

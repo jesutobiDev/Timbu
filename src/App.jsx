@@ -4,6 +4,9 @@ import Preloader from './components/Preloader';
 import Homepage from "./components/Homepage/Homepage";
 import ProductListings from "./components/ProductListings/ProductListings";
 import Product from "./components/ProductDetails/Product";
+import Cart from "./components/Cart"
+import { CartProvider } from './components/Context/CartContext';
+import Checkout from "./components/Checkout"
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -36,44 +39,54 @@ const App = () => {
   }
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <Homepage
-            handleToggleNav={handleToggleNav}
-            toggleNav={toggleNav}
-            cartStrokeColor="#ff0000"
-            linkBgColor="#00ff00"
-            linkTextColor="#0000ff"
-          />
-        }
-      />
-      <Route
-        path="/listings"
-        element={
-          <ProductListings
-            handleToggleNav={handleToggleNav}
-            toggleNav={toggleNav}
-            cartStrokeColor="#121211"
-            linkBgColor="#121211"
-            linkTextColor="#F3F2E8"
-          />
-        }
-      />
-      <Route
-        path="/product/:id"
-        element={
-          <Product
-            handleToggleNav={handleToggleNav}
-            toggleNav={toggleNav}
-            cartStrokeColor="#121211"
-            linkBgColor="#121211"
-            linkTextColor="#F3F2E8"
-          />
-        }
-      />
-    </Routes>
+    <CartProvider>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Homepage
+              handleToggleNav={handleToggleNav}
+              toggleNav={toggleNav}
+              cartStrokeColor="#ff0000"
+              linkBgColor="#00ff00"
+              linkTextColor="#0000ff"
+            />
+          }
+        />
+        <Route
+          path="/listings"
+          element={
+            <ProductListings
+              handleToggleNav={handleToggleNav}
+              toggleNav={toggleNav}
+              cartStrokeColor="#121211"
+              linkBgColor="#121211"
+              linkTextColor="#F3F2E8"
+            />
+          }
+        />
+        <Route
+          path="/product/:id"
+          element={
+            <Product
+              handleToggleNav={handleToggleNav}
+              toggleNav={toggleNav}
+              cartStrokeColor="#121211"
+              linkBgColor="#121211"
+              linkTextColor="#F3F2E8"
+            />
+          }
+        />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout
+          handleToggleNav={handleToggleNav}
+          toggleNav={toggleNav}
+          cartStrokeColor="#121211"
+          linkBgColor="#121211"
+          linkTextColor="#F3F2E8"
+        />} />
+      </Routes>
+    </CartProvider>
   );
 };
 

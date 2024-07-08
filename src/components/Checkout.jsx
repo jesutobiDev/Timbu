@@ -1,20 +1,14 @@
-import React, { useContext } from 'react';
-import Cart from "../../assets/icons/black-cart.svg"
+import React from 'react'
+import Cart from "../assets/icons/black-cart.svg"
 import { TfiMenu } from 'react-icons/tfi';
 import { Link } from "react-router-dom";
-import about from "../../assets/images/about.png"
 
-import { CartContext } from '../Context/CartContext';
-
-const Header = ({ handleToggleNav, toggleNav
+const Checkout = ({ handleToggleNav, toggleNav
 
 }) => {
-
-    const { cart } = useContext(CartContext);
-    const numberOfCartItems = cart.length;
-    return (
-        <div className=''>
-            <div className="w-full h-auto relative p-5 md:p-0 md:flex md:gap-10 md:px-[50px] md:py-5 font-poppins">
+  return (
+    <div>
+        <div className="w-full h-auto relative p-5 md:p-0 md:flex md:gap-10 md:px-[50px] md:py-5 font-poppins">
                 <div className='w-full md:w-auto flex justify-between items-center h-20 md:h-16'>
                     <p className="text-[42px] font-semibold">Timbu</p>
                     <TfiMenu className='h-[40px] w-[40px] opacity-50  md:hidden' onClick={handleToggleNav} />
@@ -27,14 +21,9 @@ const Header = ({ handleToggleNav, toggleNav
                     </ul>
                     <hr className='opacity-40' />
                     <div className="flex gap-[30px] items-center">
-                    <Link to="/cart" className="relative">
-                        <img src={Cart} alt="cart" />
-                        {numberOfCartItems > 0 && (
-                            <div className="absolute top-0 right-0 -mt-1 -mr-2 bg-[#872009] rounded-full w-4 h-4 flex items-center justify-center text-[#F3F2E8] text-xs">
-                                {numberOfCartItems}
-                            </div>
-                        )}
-                    </Link>
+                        <div>
+                            <img src={Cart} alt="cart" />
+                        </div>
                         <div className="text-[14px] font-semibold">EN</div>
                         <Link to="/listings" className="bg-[#121211] text-[#F3F2E8] px-4 py-2 rounded-full font-semibold text-[14px]">
                             Contact Us
@@ -42,14 +31,8 @@ const Header = ({ handleToggleNav, toggleNav
                     </div>
                 </div>
             </div>
-            <div className='relative m-5 md:m-0 md:mx-[50px] md:my-5 rounded-[25px] overflow-hidden h-[360px] p-12 flex items-end'>
-                <img src={about} alt="about-bg" className='w-full h-[650px] absolute top-[-170px] left-0 inset-0' />
-                <div className='absolute z-50 h-auto text-[#F3F2E8]'>
-                    <p className='font-semibold text-[45px] tracking-wider'>All Timbu Chairs</p>
-                </div>
-            </div>
-        </div>
-    )
+    </div>
+  )
 }
 
-export default Header
+export default Checkout

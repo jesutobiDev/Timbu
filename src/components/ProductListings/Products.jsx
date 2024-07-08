@@ -4,7 +4,8 @@ import SideNav from './SideNav';
 import date from '../../assets/icons/calendar.svg';
 import price from '../../assets/icons/price.svg';
 import star from "../../assets/icons/star.svg";
-import products from '../../data'; // Ensure products array is imported or defined
+import products from '../../data'; 
+
 
 const Products = () => {
     const initialFilters = [
@@ -25,6 +26,7 @@ const Products = () => {
     const resetFilters = () => {
         setFilters(initialFilters);
     };
+
 
     return (
         <div className='p-5 md:p-0 md:gap-10 md:px-[50px] md:py-5'>

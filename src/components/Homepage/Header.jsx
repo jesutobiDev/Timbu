@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react';
 import Hero from "../../assets/images/hero.svg"
 import Cart from "../../assets/icons/white-cart.svg"
 import { TfiMenu } from 'react-icons/tfi';
 import { Link } from "react-router-dom";
+import { CartContext } from '../Context/CartContext';
 
 const Header = ({ handleToggleNav, toggleNav }) => {
+  const { cart } = useContext(CartContext);
+  const numberOfCartItems = cart.length;
   return (
     <div className='h-[780px] relative text-[#F3F2E8]'>
       <img src={Hero} alt="hero-image" className='w-full h-full absolute inset-0' />
@@ -22,11 +25,15 @@ const Header = ({ handleToggleNav, toggleNav }) => {
             </ul>
             <hr className='opacity-40' />
             <div className="flex gap-[30px] items-center">
-              <div>
-                <img src={Cart} alt="cart" />
-              </div>
+            <Link to="/cart" className="relative">
+                        <img src={Cart} alt="cart" />
+                        {numberOfCartItems > 0 && (
+                            <div className="absolute top-0 right-0 -mt-1 -mr-2 bg-[#872009] rounded-full w-4 h-4 flex items-center justify-center text-[#F3F2E8] text-xs">
+                                {numberOfCartItems}
+                            </div>
+                        )}
+                    </Link>
               <div className="text-[14px] font-semibold">EN</div>
-              {/* <button className="bg-[#F3F2E8] text-black px-4 py-2 rounded-full font-semibold text-[14px]">Contact Us</button> */}
               <Link to="/" className="bg-[#F3F2E8] text-[#121211] px-4 py-2 rounded-full font-semibold text-[14px]">
                 Contact Us
               </Link>
