@@ -180,7 +180,7 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                                         <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
                                     </div>
                                     <p className="text-[#121211] font-semibold text-[20px] mt-2">{product.name}</p>
-                                    <p className="font-semibold text-[#872009] text-[16px]">{product.price}</p>
+                                    <p className="font-semibold text-[#872009] text-[16px]">${product.price}</p>
                                 </Link>
                             );
                         }

@@ -23,7 +23,6 @@ const Cart = () => {
     const handleRemoveFromCart = (id) => {
         removeFromCart(id);
     };
-    
 
     return (
         <div className='bg-gray-600/10 w-full min-h-screen flex items-center justify-center p-[100px]'>
@@ -38,7 +37,9 @@ const Cart = () => {
                     {cart.length === 0 ? (
                         <div className='my-2 flex flex-col items-center gap-[15px]'>
                             <p className='text-[#000000]/30 flex items-center justify-center font-semibold text-[24px]'>There are no items in your cart</p>
-                            <Link to="/listings" className='flex gap-[10px] font-semibold items-center justify-center border-[2px] border-[#121211] rounded-full w-fit px-[20px] py-[10px]'><img src={Arrow} alt="arrow-back" className='rotate-180' />  Go back to product listings</Link>
+                            <Link to="/listings" className='flex gap-[10px] font-semibold items-center justify-center border-[2px] border-[#121211] rounded-full w-fit px-[20px] py-[10px]'>
+                                <img src={Arrow} alt="arrow-back" className='rotate-180' />  Go back to product listings
+                            </Link>
                         </div>
                     ) : (
                         cart.map((item, index) => {
@@ -67,7 +68,13 @@ const Cart = () => {
                 </div>
                 <form action="" className='flex flex-col gap-[20px]'>
                     <input type="text" placeholder='Coupon code' className='w-full outline-none bg-[#12121126] h-[60px] pl-[20px] rounded-full placeholder:text-[#121211]' />
-                    <Link to="/checkout" className='flex gap-[10px] items-center bg-[#121211] rounded-full w-full text-[#F3F2E8] h-[60px] justify-center'>Proceed to Checkout <img src={Arrow} alt="" className='filter invert' /></Link>
+                    <Link 
+                        to={cart.length === 0 ? "#" : "/checkout"} 
+                        className={`flex gap-[10px] items-center rounded-full w-full h-[60px] justify-center  text-[#F3F2E8] ${cart.length === 0 ? 'bg-[#121211]/70 cursor-not-allowed' : 'bg-[#121211]'}`}
+                        style={{ pointerEvents: cart.length === 0 ? 'none' : 'auto' }}
+                    >
+                        Proceed to Checkout <img src={Arrow} alt="" className='filter invert' />
+                    </Link>
                 </form>
             </div>
         </div>
