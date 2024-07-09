@@ -35,22 +35,22 @@ const Product = ({ handleToggleNav, toggleNav }) => {
         }
     };
 
-
     const handleAddToCart = ({ id, quantity, selectedColor }) => {
         addToCart({ id, quantity, selectedColor });
     };
+
     const numberOfCartItems = cart.length;
 
     const renderSectionContent = () => {
         switch (activeSection) {
             case 'details':
                 return (
-                    <div className='flex gap-[20px] justify-between border-y-[2px] py-[40px]'>
+                    <div className='flex gap-[20px] justify-between border-b-[1px] border-[#121211]/20 py-[20px]'>
                         <p>{product.description}</p>
                         <p>{product.availability}</p>
                         <div className='flex gap-[15px] flex-col'>
                             {product.characteristics.map((char, index) => (
-                                <div key={index} className='flex items-center gap-[10px] mb-2'>
+                                <div key={index} className='flex items-center gap-[10px]'>
                                     <img src={char.icon} className='w-6 h-6' alt={char.icon_text} />
                                     <p className='text-nowrap'>{char.icon_text}</p>
                                 </div>
@@ -59,16 +59,15 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                     </div>
                 );
             case 'specs':
-                return <ul>{product.specs.map((spec, index) => <li key={index}>{spec}</li>)}</ul>;
+                return <div>Specifications</div>;
             case 'reviews':
-                return <div>{product.reviews.map((review, index) => <p key={index}>{review}</p>)}</div>;
+                return <div>Reviews</div>;
             case 'warranty':
-                return <p>{product.warrantyInfo}</p>;
+                return <p>Warranty</p>;
             default:
                 return null;
         }
     };
-
 
     return (
         <div className="">
@@ -85,14 +84,14 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                     </ul>
                     <hr className='opacity-40' />
                     <div className="flex gap-[30px] items-center">
-                    <Link to="/cart" className="relative">
-                        <img src={Cart} alt="cart" />
-                        {numberOfCartItems > 0 && (
-                            <div className="absolute top-0 right-0 -mt-1 -mr-2 bg-[#872009] rounded-full w-4 h-4 flex items-center justify-center text-[#F3F2E8] text-xs">
-                                {numberOfCartItems}
-                            </div>
-                        )}
-                    </Link>
+                        <Link to="/cart" className="relative">
+                            <img src={Cart} alt="cart" />
+                            {numberOfCartItems > 0 && (
+                                <div className="absolute top-0 right-0 -mt-1 -mr-2 bg-[#872009] rounded-full w-4 h-4 flex items-center justify-center text-[#F3F2E8] text-xs">
+                                    {numberOfCartItems}
+                                </div>
+                            )}
+                        </Link>
                         <div className="text-[14px] font-semibold">EN</div>
                         <Link to="/listings" className="bg-[#121211] text-[#F3F2E8] px-4 py-2 rounded-full font-semibold text-[14px]">
                             Contact Us
@@ -158,13 +157,27 @@ const Product = ({ handleToggleNav, toggleNav }) => {
             </div>
 
             <div className="my-10 p-5 md:px-[50px] md:py-5">
-                <div className="flex gap-5 mb-5">
-                    <button className={`px-4 py-2 rounded-full ${activeSection === 'details' ? 'bg-[#121211] text-[#F3F2E8]' : 'bg-gray-200 text-gray-800'}`} onClick={() => setActiveSection('details')}>Details</button>
-                    <button className={`px-4 py-2 rounded-full ${activeSection === 'specs' ? 'bg-[#121211] text-[#F3F2E8]' : 'bg-gray-200 text-gray-800'}`} >Product Specs</button>
-                    <button className={`px-4 py-2 rounded-full ${activeSection === 'reviews' ? 'bg-[#121211] text-[#F3F2E8]' : 'bg-gray-200 text-gray-800'}`} >Reviews</button>
-                    <button className={`px-4 py-2 rounded-full ${activeSection === 'warranty' ? 'bg-[#121211] text-[#F3F2E8]' : 'bg-gray-200 text-gray-800'}`} >Warranty Info</button>
+                <div className="flex gap-5 border-b-[1px] border-[#121211]/20 h-[42px]">
+                    <div className='cursor-pointer' onClick={() => setActiveSection('details')}>
+                        <button className={`px-4 leading-[8px] ${activeSection === 'details' ? 'text-[22px] text-[#121211] font-semibold' : ' text-[18px]'}`} >Details</button>
+                        <div className={`w-full h-[4px] mt-4 rounded-full ${activeSection === 'details' ? 'bg-[#872009]' : ''}`}></div>
+                    </div>
+                    <div className='cursor-pointer' onClick={() => setActiveSection('specs')}>
+                        <button className={`px-4 leading-[8px] ${activeSection === 'specs' ? 'text-[22px] text-[#121211] font-semibold' : ' text-[18px]'}`} >Product Specs</button>
+                        <div className={`w-full h-[4px] mt-4 rounded-full ${activeSection === 'specs' ? 'bg-[#872009]' : ''}`}></div>
+                    </div>
+
+                    <div className='cursor-pointer' onClick={() => setActiveSection('reviews')}>
+                        <button className={`px-4 leading-[8px] ${activeSection === 'reviews' ? 'text-[22px] text-[#121211] font-semibold' : ' text-[18px]'}`} >Reviews</button>
+                        <div className={`w-full h-[4px] mt-4 rounded-full ${activeSection === 'reviews' ? 'bg-[#872009]' : ''}`}></div>
+                    </div>
+
+                    <div className='cursor-pointer' onClick={() => setActiveSection('warranty')}>
+                        <button className={`px-4 leading-[8px] ${activeSection === 'warranty' ? 'text-[22px] text-[#121211] font-semibold' : ' text-[18px]'}`} >Warranty Info</button>
+                        <div className={`w-full h-[4px] mt-4 rounded-full ${activeSection === 'warranty' ? 'bg-[#872009]' : ''}`}></div>
+                    </div>
                 </div>
-                <div className=" p-5 rounded-lg">
+                <div className=" py-5 rounded-lg">
                     {renderSectionContent()}
                 </div>
             </div>

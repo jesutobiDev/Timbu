@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import { CartContext } from './Context/CartContext';
 import products from '../data';
 import Arrow from "../assets/icons/arrow-forward.svg";
+import Shipping from "./Shipping";
 
 const Checkout = ({ handleToggleNav, toggleNav }) => {
-    const [activeSection, setActiveSection] = useState('details');
+    const [activeSection, setActiveSection] = useState('shipping');
     const { cart, removeFromCart } = useContext(CartContext);
     const numberOfCartItems = cart.length;
 
@@ -43,18 +44,12 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
 
     const renderSectionContent = () => {
         switch (activeSection) {
-            case 'details':
-                return (
-                    <div className=''>
-                        <p>Details</p>
-                    </div>
-                );
-            case 'specs':
-                return <ul>{product.specs.map((spec, index) => <li key={index}>{spec}</li>)}</ul>;
-            case 'reviews':
-                return <div>{product.reviews.map((review, index) => <p key={index}>{review}</p>)}</div>;
-            case 'warranty':
-                return <p>{product.warrantyInfo}</p>;
+            case 'shipping':
+                return <Shipping />;
+            case 'payment':
+                return <div>Payment</div>;
+            case 'finalize':
+                return <div>Finalize</div>;
             default:
                 return null;
         }
@@ -97,25 +92,40 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
                 </div>
             </div>
             {numberOfCartItems > 0 ? (
-                <div className='flex gap-[50px] justify-between mb-[50px]'>
-                    <div className="flex-1 ">
-                        <div className="flex gap-5 pb-[20px] h-[60px] border-b-[2px] border-[#121211]/30">
-                            <button className={`px-4 py-2 rounded-full ${activeSection === 'details' ? 'bg-[#121211] text-[#F3F2E8]' : 'bg-gray-200 text-gray-800'}`} onClick={() => setActiveSection('details')}>Shipping Details</button>
-                            <button className={`px-4 py-2 rounded-full ${activeSection === 'specs' ? 'bg-[#121211] text-[#F3F2E8]' : 'bg-gray-200 text-gray-800'}`} >Payment Methods</button>
-                            <button className={`px-4 py-2 rounded-full ${activeSection === 'reviews' ? 'bg-[#121211] text-[#F3F2E8]' : 'bg-gray-200 text-gray-800'}`} >3. Finalize</button>
+                <div className='flex gap-[30px] justify-between mb-[20px]'>
+                    <div className="flex-1">
+                        <div className="flex gap-5 border-b-[1px] border-[#121211]/20 h-[42px]">
+                            <div className='cursor-pointer' onClick={() => setActiveSection('shipping')}>
+                                <button className={`px-4 leading-[8px] ${activeSection === 'shipping' ? 'text-[22px] text-[#121211] font-semibold' : 'text-[18px]'}`}>
+                                    1. Shipping Details
+                                </button>
+                                <div className={`w-full h-[4px] mt-4 rounded-full ${activeSection === 'shipping' ? 'bg-[#872009]' : ''}`}></div>
+                            </div>
+                            <div className='cursor-pointer' onClick={() => setActiveSection('payment')}>
+                                <button className={`px-4 leading-[8px] ${activeSection === 'payment' ? 'text-[22px] text-[#121211] font-semibold' : 'text-[18px]'}`}>
+                                    2. Payment Method
+                                </button>
+                                <div className={`w-full h-[4px] mt-4 rounded-full ${activeSection === 'payment' ? 'bg-[#872009]' : ''}`}></div>
+                            </div>
+                            <div className='cursor-pointer' onClick={() => setActiveSection('finalize')}>
+                                <button className={`px-4 leading-[8px] ${activeSection === 'finalize' ? 'text-[22px] text-[#121211] font-semibold' : 'text-[18px]'}`}>
+                                    3. Finalize
+                                </button>
+                                <div className={`w-full h-[4px] mt-4 rounded-full ${activeSection === 'finalize' ? 'bg-[#872009]' : ''}`}></div>
+                            </div>
                         </div>
-                        <div className=" p-5 rounded-lg">
+                        <div className="py-5 rounded-lg">
                             {renderSectionContent()}
                         </div>
                     </div>
                     <div>
-                        <p className='text-[#121211] pb-[20px] border-b-[2px] border-[#121211]/30 font-semibold text-[24px] h-[60px]'>Cart Summary</p>
+                        <p className='text-[#121211] border-b-[1px] border-[#121211]/30 font-semibold text-[24px] h-[42px] leading-[8px]'>Cart Summary</p>
                         <div>
                             {cart.map((item, index) => {
                                 const product = products.find(p => p.id === item.id);
                                 if (!product) return null;
                                 return (
-                                    <div key={index} className='flex justify-between gap-[50px] items-center border-b-[2px] border-[#121211]/30 py-[20px] pb-[20px]'>
+                                    <div key={index} className='flex justify-between gap-[50px] items-center border-b-[1px] border-[#121211]/30 py-[20px] pb-[20px]'>
                                         <div className='flex items-center gap-[20px]'>
                                             <img src={product.image} alt={product.name} className='w-[100px] h-[100px] object-cover rounded-[12px]' />
                                             <div>
@@ -130,7 +140,7 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
                                 );
                             })}
                         </div>
-                        <p className='text-[#121211] py-[20px] border-b-[2px] border-[#121211]/30 font-semibold text-[24px]'>Order Summary</p>
+                        <p className='text-[#121211] py-[20px] border-b-[1px] border-[#121211]/30 font-semibold text-[24px]'>Order Summary</p>
                         <div className='flex mt-[20px] text-[18px] items-center justify-between '>
                             <p>Subtotal</p>
                             <p>${subtotal}</p>
@@ -139,7 +149,7 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
                             <p>Shipping</p>
                             <p>${shippingFee}</p>
                         </div>
-                        <div className='flex mt-[20px] text-[18px] items-center justify-between border-b-[2px] border-[#121211]/30 pb-[10px] '>
+                        <div className='flex mt-[20px] text-[18px] items-center justify-between border-b-[1px] border-[#121211]/30 pb-[10px] '>
                             <p>Coupon Discount</p>
                             <p>${couponDiscount}</p>
                         </div>
@@ -162,5 +172,3 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
 }
 
 export default Checkout;
-
-
