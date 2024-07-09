@@ -6,6 +6,8 @@ import { CartContext } from './Context/CartContext';
 import products from '../data';
 import Arrow from "../assets/icons/arrow-forward.svg";
 import Shipping from "./Shipping";
+import Payment from './Payment';
+import Finalize from "./Finalize"
 
 const Checkout = ({ handleToggleNav, toggleNav }) => {
     const [activeSection, setActiveSection] = useState('shipping');
@@ -45,11 +47,11 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
     const renderSectionContent = () => {
         switch (activeSection) {
             case 'shipping':
-                return <Shipping />;
+                return <Shipping setActiveSection = {setActiveSection} />;
             case 'payment':
-                return <div>Payment</div>;
+                return <Payment setActiveSection = {setActiveSection} />;
             case 'finalize':
-                return <div>Finalize</div>;
+                return <Finalize/>;
             default:
                 return null;
         }
@@ -85,30 +87,30 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
                     </div>
                 </div>
             </div>
-            <div className='w-full h-[360px] rounded-[24px] my-10 relative overflow-hidden '>
+            <div className='w-full h-[155px] md:h-[360px] rounded-[24px] my-10 relative overflow-hidden '>
                 <img src={numberOfCartItems > 0 ? firstCartItemImage : randomProductImage} alt="Cart Item" className='w-full h-full object-cover absolute inset-0' />
                 <div className='bg-[#121211]/30 w-full h-full z-10 absolute p-12 flex items-end'>
                     <p className='text-[#F3F2E8] font-semibold text-[42px]'>Checkout</p>
                 </div>
             </div>
             {numberOfCartItems > 0 ? (
-                <div className='flex gap-[30px] justify-between mb-[20px]'>
+                <div className='flex flex-col-reverse lg:flex-row gap-[30px] justify-between mb-[20px]'>
                     <div className="flex-1">
                         <div className="flex gap-5 border-b-[1px] border-[#121211]/20 h-[42px]">
-                            <div className='cursor-pointer' onClick={() => setActiveSection('shipping')}>
-                                <button className={`px-4 leading-[8px] ${activeSection === 'shipping' ? 'text-[22px] text-[#121211] font-semibold' : 'text-[18px]'}`}>
+                            <div className='cursor-pointer'>
+                                <button className={`px-4 leading-[8px]  ${activeSection === 'shipping' ? 'text-[22px] text-[#121211] font-semibold' : 'text-[18px] hidden md:block'}`}>
                                     1. Shipping Details
                                 </button>
                                 <div className={`w-full h-[4px] mt-4 rounded-full ${activeSection === 'shipping' ? 'bg-[#872009]' : ''}`}></div>
                             </div>
-                            <div className='cursor-pointer' onClick={() => setActiveSection('payment')}>
-                                <button className={`px-4 leading-[8px] ${activeSection === 'payment' ? 'text-[22px] text-[#121211] font-semibold' : 'text-[18px]'}`}>
+                            <div className='cursor-pointer'>
+                                <button className={`px-4 leading-[8px] ${activeSection === 'payment' ? 'text-[22px] text-[#121211] font-semibold' : 'text-[18px] hidden md:block'}`}>
                                     2. Payment Method
                                 </button>
                                 <div className={`w-full h-[4px] mt-4 rounded-full ${activeSection === 'payment' ? 'bg-[#872009]' : ''}`}></div>
                             </div>
-                            <div className='cursor-pointer' onClick={() => setActiveSection('finalize')}>
-                                <button className={`px-4 leading-[8px] ${activeSection === 'finalize' ? 'text-[22px] text-[#121211] font-semibold' : 'text-[18px]'}`}>
+                            <div className='cursor-pointer'>
+                                <button className={`px-4 leading-[8px] ${activeSection === 'finalize' ? 'text-[22px] text-[#121211] font-semibold' : 'text-[18px] hidden md:block'}`}>
                                     3. Finalize
                                 </button>
                                 <div className={`w-full h-[4px] mt-4 rounded-full ${activeSection === 'finalize' ? 'bg-[#872009]' : ''}`}></div>
@@ -118,7 +120,7 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
                             {renderSectionContent()}
                         </div>
                     </div>
-                    <div>
+                    <div className=''>
                         <p className='text-[#121211] border-b-[1px] border-[#121211]/30 font-semibold text-[24px] h-[42px] leading-[8px]'>Cart Summary</p>
                         <div>
                             {cart.map((item, index) => {
@@ -129,10 +131,10 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
                                         <div className='flex items-center gap-[20px]'>
                                             <img src={product.image} alt={product.name} className='w-[100px] h-[100px] object-cover rounded-[12px]' />
                                             <div>
-                                                <p className='font-semibold text-[20px]'>{product.name}</p>
-                                                <p className='text-[16px] text-gray-600'>Color: {item.selectedColor}</p>
-                                                <p className='text-[16px] text-gray-600'>Qty: {item.quantity}</p>
-                                                <p className='text-[20px] text-[#872009] font-light'>${product.price * item.quantity}</p>
+                                                <p className='font-semibold text-[14px] md:text-[20px]'>{product.name}</p>
+                                                <p className='text-[14px] md:text-[16px] text-gray-600'>Color: {item.selectedColor}</p>
+                                                <p className='text-[14px] md:text-[16px] text-gray-600'>Qty: {item.quantity}</p>
+                                                <p className='text-[14px] md:text-[20px] text-[#872009] font-light'>${product.price * item.quantity}</p>
                                             </div>
                                         </div>
                                         <p className='cursor-pointer' onClick={() => handleRemoveFromCart(item.id)}>Remove</p>

@@ -26,7 +26,7 @@ const Cart = () => {
 
     return (
         <div className='bg-gray-600/10 w-full min-h-screen flex items-center justify-center md:p-[100px]'>
-            <div className='bg-[#F3F2E8] rounded-[24px] w-[90%] md:w-[600px] min-h-[494px] shadow-2xl flex flex-col gap-[20px] p-[40px]'>
+            <div className='bg-[#F3F2E8] rounded-[24px] w-[90%] md:w-[600px] min-h-[494px] shadow-2xl flex flex-col gap-[20px] p-[20px] md:p-[40px]'>
                 <div className='flex justify-between items-center'>
                     <p className='font-semibold text-[42px]'>Cart</p>
                     <Link to="/listings" className="bg-[#872009] w-9 h-9 rounded-full flex items-center justify-center">
@@ -48,12 +48,12 @@ const Cart = () => {
                             return (
                                 <div key={index} className='flex justify-between items-center border-b-[2px] border-[#121211] py-[20px] pb-[20px]'>
                                     <div className='flex items-center gap-[20px]'>
-                                        <img src={product.image} alt={product.name} className='w-[100px] h-[100px] object-cover rounded-[12px]' />
+                                        <img src={product.image} alt={product.name} className='w-[72px] h-[72px] md:w-[100px] md:h-[100px] object-cover rounded-[12px]' />
                                         <div>
-                                            <p className='font-semibold text-[20px]'>{product.name}</p>
-                                            <p className='text-[16px] text-gray-600'>Color: {item.selectedColor}</p>
-                                            <p className='text-[16px] text-gray-600'>Qty: {item.quantity}</p>
-                                            <p className='text-[20px] text-[#872009] font-light'>${product.price * item.quantity}</p>
+                                            <p className='font-semibold text-[14px] md:text-[20px]'>{product.name}</p>
+                                            <p className='text-[14px] md:text-[16px] text-gray-600'>Color: {item.selectedColor}</p>
+                                            <p className='text-[14px] md:text-[16px] text-gray-600'>Qty: {item.quantity}</p>
+                                            <p className='text-[14px] md:text-[20px] text-[#872009] font-light'>${product.price * item.quantity}</p>
                                         </div>
                                     </div>
                                     <p className='cursor-pointer' onClick={() => handleRemoveFromCart(item.id)}>Remove</p>
