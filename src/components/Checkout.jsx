@@ -56,7 +56,7 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
     };
 
     return (
-        <div className='p-5 md:p-0 md:px-[50px] md:py-5 text-wrap'>
+        <div className='p-5 md:p-0 md:px-[50px] md:py-5 text-wrap w-full'>
             <div className="w-full h-auto relative md:flex md:gap-10 font-poppins">
                 <div className='w-full md:w-auto flex justify-between items-center h-20 md:h-16'>
                     <p className="text-[42px] font-semibold">Timbu</p>
