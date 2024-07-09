@@ -3,10 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+body {
     font-family: "Poppins", sans-serif;
     background-color: #F3F2E8;
 }
+
 .preloader-text {
     background-image: url("./assets/images/hero.svg");
     background-repeat: repeat;
@@ -14,10 +15,15 @@ body{
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     -webkit-font-smoothing: antialiased;
-  }
+}
 
-  
-  .shadow{
+.shadow {
+
     box-shadow: 0px 4px 24px 0px #12121140;
+}
 
-  }
+@media (min-width: 640px) {
+    .shadow {
+        box-shadow: none;
+    }
+}

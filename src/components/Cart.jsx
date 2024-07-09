@@ -25,8 +25,8 @@ const Cart = () => {
     };
 
     return (
-        <div className='bg-gray-600/10 w-full min-h-screen flex items-center justify-center p-[100px]'>
-            <div className='bg-[#F3F2E8] rounded-[24px] w-[600px] min-h-[494px] shadow-2xl flex flex-col gap-[20px] p-[40px]'>
+        <div className='bg-gray-600/10 w-full min-h-screen flex items-center justify-center md:p-[100px]'>
+            <div className='bg-[#F3F2E8] rounded-[24px] w-[90%] md:w-[600px] min-h-[494px] shadow-2xl flex flex-col gap-[20px] p-[40px]'>
                 <div className='flex justify-between items-center'>
                     <p className='font-semibold text-[42px]'>Cart</p>
                     <Link to="/listings" className="bg-[#872009] w-9 h-9 rounded-full flex items-center justify-center">
@@ -36,7 +36,7 @@ const Cart = () => {
                 <div>
                     {cart.length === 0 ? (
                         <div className='my-2 flex flex-col items-center gap-[15px]'>
-                            <p className='text-[#000000]/30 flex items-center justify-center font-semibold text-[24px]'>There are no items in your cart</p>
+                            <p className='text-[#000000]/30 flex items-center justify-center font-semibold text-[24px] text-center'>There are no items in your cart</p>
                             <Link to="/listings" className='flex gap-[10px] font-semibold items-center justify-center border-[2px] border-[#121211] rounded-full w-fit px-[20px] py-[10px]'>
                                 <img src={Arrow} alt="arrow-back" className='rotate-180' />  Go back to product listings
                             </Link>

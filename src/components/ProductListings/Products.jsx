@@ -37,13 +37,13 @@ const Products = () => {
             <div className='flex justify-between items-center' onClick={toggleDropdown}>
                 <p className='font-bold w-[95px] text-wrap'>Showing {products.length} Results</p>
                 <div className='relative flex-1 flex justify-end items-center'>
-                    <img 
-                        src={filterIcon} 
-                        alt="filter-icon" 
-                        className='w-[48px] h-[48px] md:hidden cursor-pointer' 
-                        onClick={toggleDropdown} 
+                    <img
+                        src={filterIcon}
+                        alt="filter-icon"
+                        className='w-[48px] h-[48px] md:hidden cursor-pointer'
+                        onClick={toggleDropdown}
                     />
-                    <div className={`absolute top-0 right-0 flex-col md:flex-row lg:gap-[100px] bg-[#F3F2E8] md:bg-transparent shadow md:shadow-none rounded-[24px] md:rounded p-[20px] md:p-0 w-[200px] md:w-auto gap-[20px] ${dropdownOpen ? 'flex' : 'hidden md:flex'}`}>
+                    <div className={`absolute top-0 right-0 flex-col md:flex-row lg:gap-[100px] bg-[#F3F2E8] md:bg-transparent shadow md:shadow-none rounded-[24px] md:rounded p-[20px] md:p-0 w-[200px] md:w-auto gap-[20px] z-10 ${dropdownOpen ? 'flex' : 'hidden md:flex'}`}>
                         <div className='flex items-center lg:gap-2 flex-col md:flex-row'>
                             <p className='font-bold text-[18px] mr-1 hidden md:flex'>Sort By :</p>
                             <div className="flex gap-2 items-center flex-wrap flex-col md:flex-row w-full md:w-auto">
@@ -69,7 +69,9 @@ const Products = () => {
                 </div>
             </div>
             <div className='flex flex-col md:flex-row justify-between my-10 gap-[50px]'>
-                <SideNav />
+                <div className='h-[60px] md:h-auto relative'>
+                    <SideNav />
+                </div>
                 <div className='flex flex-1 flex-wrap justify-between gap-[10px] gap-y-[30px] lg:gap-[30px] flex-col md:flex-row'>
                     {products.map((product, index) => (
                         <Link key={index} to={`/product/${product.id}`}>

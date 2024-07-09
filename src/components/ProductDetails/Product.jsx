@@ -99,14 +99,14 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                     </div>
                 </div>
             </div>
-            <div className='my-10 flex gap-[100px] justify-between p-5 md:p-0 md:px-[50px] md:py-5'>
+            <div className='my-10 flex flex-col md:flex-row md:gap-[100px] justify-between p-5 md:p-0 md:px-[50px] md:py-5'>
                 <div className='flex flex-col gap-[35px]'>
                     <Link to="/listings" className='flex gap-1 font-bold'> <img src={Arrow} alt="arrow-back" className='rotate-180' /> Back to lists</Link>
                     <p className='font-semibold text-[42px]'>{product.name}</p>
                     <p>{product.description}</p>
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-2 md:items-center flex-col md:flex-row">
                         <h3 className="font-semibold text-[24px]">Color :</h3>
-                        <div className="flex gap-2 items-center">
+                        <div className="flex gap-2 items-center flex-wrap">
                             {product.colorVariants.map((variant, index) => (
                                 <div
                                     key={index}
@@ -142,7 +142,7 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                         </div>
                     </div>
                     <div
-                        className="bg-[#121211] cursor-pointer text-[#F3F2E8] px-4 py-2 rounded-full font-semibold text-[14px] mt-4 w-fit flex gap-2"
+                        className="bg-[#121211] cursor-pointer text-[#F3F2E8] px-4 py-2 rounded-full font-semibold text-[14px] mt-4 w-full flex justify-center md:w-fit flex gap-2"
                         onClick={() => handleAddToCart({ id: product.id, quantity, selectedColor })}
                     >
                         Add to Cart<span>${product.price}</span>
@@ -150,13 +150,13 @@ const Product = ({ handleToggleNav, toggleNav }) => {
 
                 </div>
                 <div>
-                    <div className='w-[500px] h-[500px] rounded-[12px] object-cover overflow-hidden'>
+                    <div className='md:w-[500px] w-full h-[500px] rounded-[12px] object-cover overflow-hidden'>
                         <img src={product.image} alt={product.name} className='w-full h-full' />
                     </div>
                 </div>
             </div>
 
-            <div className="my-10 p-5 md:px-[50px] md:py-5">
+            <div className="my-10 p-5 md:px-[50px] md:py-5 hidden">
                 <div className="flex gap-5 border-b-[1px] border-[#121211]/20 h-[42px]">
                     <div className='cursor-pointer' onClick={() => setActiveSection('details')}>
                         <button className={`px-4 leading-[8px] ${activeSection === 'details' ? 'text-[22px] text-[#121211] font-semibold' : ' text-[18px]'}`} >Details</button>
@@ -184,7 +184,7 @@ const Product = ({ handleToggleNav, toggleNav }) => {
 
             <div className="m-5 md:m-0 md:mx-[50px] md:my-20">
                 <p className="text-[32px] font-semibold">Other products you might like</p>
-                <div className="flex mt-[30px] justify-between">
+                <div className="flex mt-[30px] justify-between flex-col md:flex-row">
                     {products.map((product, index) => {
                         if (index < 3) {
                             return (
