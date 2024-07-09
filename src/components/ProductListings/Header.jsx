@@ -27,14 +27,14 @@ const Header = ({ handleToggleNav, toggleNav
                     </ul>
                     <hr className='opacity-40' />
                     <div className="flex gap-[30px] items-center">
-                    <Link to="/cart" className="relative">
-                        <img src={Cart} alt="cart" />
-                        {numberOfCartItems > 0 && (
-                            <div className="absolute top-0 right-0 -mt-1 -mr-2 bg-[#872009] rounded-full w-4 h-4 flex items-center justify-center text-[#F3F2E8] text-xs">
-                                {numberOfCartItems}
-                            </div>
-                        )}
-                    </Link>
+                        <Link to="/cart" className="relative">
+                            <img src={Cart} alt="cart" />
+                            {numberOfCartItems > 0 && (
+                                <div className="absolute top-0 right-0 -mt-1 -mr-2 bg-[#872009] rounded-full w-4 h-4 flex items-center justify-center text-[#F3F2E8] text-xs">
+                                    {numberOfCartItems}
+                                </div>
+                            )}
+                        </Link>
                         <div className="text-[14px] font-semibold">EN</div>
                         <Link to="/listings" className="bg-[#121211] text-[#F3F2E8] px-4 py-2 rounded-full font-semibold text-[14px]">
                             Contact Us
@@ -42,8 +42,11 @@ const Header = ({ handleToggleNav, toggleNav
                     </div>
                 </div>
             </div>
-            <div className='relative m-5 md:m-0 md:mx-[50px] md:my-5 rounded-[25px] overflow-hidden h-[360px] p-12 flex items-end'>
-                <img src={about} alt="about-bg" className='w-full h-[650px] absolute top-[-170px] left-0 inset-0' />
+            <div className='relative m-5 md:m-0 md:mx-[50px] md:my-5 rounded-[25px] overflow-hidden h-[256px] md:h-[360px] p-12 flex items-end'>
+                <img src={about} alt="about-bg" className='w-full h-[650px] absolute top-[-170px] left-0' />
+                {/* <div className='absolute w-[650px] h-[500px] md:w-full md:h-full'>
+                    <img src={about} alt="hero-image" className='w-full h-full' />
+                </div> */}
                 <div className='absolute z-50 h-auto text-[#F3F2E8]'>
                     <p className='font-semibold text-[45px] tracking-wider'>All Timbu Chairs</p>
                 </div>
