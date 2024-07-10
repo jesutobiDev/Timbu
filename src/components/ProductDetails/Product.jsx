@@ -6,6 +6,8 @@ import { TfiMenu } from 'react-icons/tfi';
 import { Link } from "react-router-dom";
 import Arrow from "../../assets/icons/arrow-forward.svg";
 import Footer from "../Footer"
+import bars from "../../assets/icons/bars.svg";
+import close from "../../assets/icons/close.svg";
 import { CartContext } from '../Context/CartContext';
 
 const Product = ({ handleToggleNav, toggleNav }) => {

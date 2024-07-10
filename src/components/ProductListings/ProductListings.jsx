@@ -6,7 +6,7 @@ import Footer from '../Footer'
 const ProductListings = ({ handleToggleNav, toggleNav }) => {
     return (
         <div>
-            <Header/>
+            <Header handleToggleNav={handleToggleNav} toggleNav={toggleNav} />
             <Products/>
             <Footer />
         </div>

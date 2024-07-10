@@ -8,6 +8,8 @@ import Arrow from "../assets/icons/arrow-forward.svg";
 import Shipping from "./Shipping";
 import Payment from './Payment';
 import Finalize from "./Finalize"
+import bars from "../assets/icons/bars.svg"
+import close from "../assets/icons/close.svg"
 
 const Checkout = ({ handleToggleNav, toggleNav }) => {
     const [activeSection, setActiveSection] = useState('shipping');
