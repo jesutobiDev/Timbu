@@ -121,7 +121,7 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
                     </div>
                     <div className=''>
                         <p className='text-[#121211] border-b-[1px] border-[#121211]/30 font-semibold text-[24px] h-[42px] leading-[8px]'>Cart Summary</p>
-                        <div className=' flex'>
+                        <div className=' flex flex-col'>
                             {products.map((product, index) => (
                                 <CartItem
                                     key={index}

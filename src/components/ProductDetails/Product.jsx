@@ -60,7 +60,7 @@ const Product = ({ handleToggleNav, toggleNav }) => {
     }, []);
 
     if (!product) {
-        return <p>Loading...</p>;
+        return <p className='w-full h-screen items-center justify-center flex text-bold text-[18px] bg-red-400'>Loading...</p>;
     }
 
     const handleIncrease = () => {
