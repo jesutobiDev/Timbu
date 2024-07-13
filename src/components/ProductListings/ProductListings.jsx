@@ -5,7 +5,7 @@ import Footer from '../Footer'
 
 const ProductListings = ({ handleToggleNav, toggleNav }) => {
     return (
-        <div>
+        <div className='w-full'>
             <Header handleToggleNav={handleToggleNav} toggleNav={toggleNav} />
             <Products/>
             <Footer />

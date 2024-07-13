@@ -4,9 +4,9 @@ import Preloader from './components/Preloader';
 import Homepage from "./components/Homepage/Homepage";
 import ProductListings from "./components/ProductListings/ProductListings";
 import Product from "./components/ProductDetails/Product";
-import Cart from "./components/Cart"
+import Cart from "./components/Cart/Cart"
 import { CartProvider } from './components/Context/CartContext';
-import Checkout from "./components/Checkout"
+import Checkout from "./components/Checkout/Checkout"
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -66,7 +66,7 @@ const App = () => {
           }
         />
         <Route
-          path="/product/:id"
+          path="/products/:id"
           element={
             <Product
               handleToggleNav={handleToggleNav}
