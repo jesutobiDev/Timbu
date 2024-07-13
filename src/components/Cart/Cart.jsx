@@ -79,7 +79,7 @@ const Cart = () => {
                             </p>
                             <Link
                                 to='/listings'
-                                className='flex gap-[10px] font-semibold items-center justify-center border-[2px] border-[#121211] rounded-full w-fit px-[20px] py-[10px] text-[10px]'>
+                                className='flex gap-[10px] font-semibold items-center justify-center border-[2px] border-[#121211] rounded-full w-fit py-[5px] px-[10px] lg:px-[20px] lg:py-[10px] '>
                                 <img src={Arrow} alt='arrow-back' className='rotate-180' /> Go back to product listings
                             </Link>
                         </div>

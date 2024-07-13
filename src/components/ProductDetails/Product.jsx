@@ -161,7 +161,7 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                     </div>
                 </div>
             </div>
-            <div className="m-5 md:m-0 md:mx-[50px] md:my-10">
+            <div className="m-5 md:m-0 md:mx-[50px] md:my-10 bg-red-400">
                 <div className="flex-col md:flex-row flex justify-between text-[#121211] items-center gap-[30px]">
                     <p className="text-[32px] font-semibold ">Other products you might like</p>
                 </div>
