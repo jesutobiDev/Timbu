@@ -60,7 +60,7 @@ const Product = ({ handleToggleNav, toggleNav }) => {
     }, []);
 
     if (!product) {
-        return <p className='w-full h-screen items-center justify-center flex text-bold text-[18px] bg-red-400'>Loading...</p>;
+        return <p className='w-full h-screen items-center justify-center flex font-bold text-[18px]'>Loading...</p>;
     }
 
     const handleIncrease = () => {
@@ -96,9 +96,8 @@ const Product = ({ handleToggleNav, toggleNav }) => {
 
     const numberOfCartItems = cart.length;
 
-
     return (
-        <div>
+        <div className={showProductImageModal ? 'fixed-container' : ''}>
             <Navbar handleToggleNav={handleToggleNav} toggleNav={toggleNav} />
             <div className='my-10 flex flex-col lg:flex-row lg:gap-[100px] justify-between p-5 md:p-0 md:px-[50px] lg:py-5 lg:my-0'>
                 <div className='flex flex-col gap-[35px]'>
@@ -134,13 +133,13 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                 </div>
                 <div className='md:mt-[50px] lg:mt-[30px] mt-[50px] lg:w-[75%]'>
                     <div className='flex flex-col gap-[20px]'>
-                        <div className='lg:w-[500px] lg:min-h-[450px] lg:h-auto  w-full h-[360px] rounded-[12px] object-cover overflow-hidden'>
+                        <div className='lg:w-[500px] lg:h-[450px] bg-red-600 lg:h-auto  w-full h-[360px] rounded-[12px] object-cover overflow-hidden'>
                             <img src={`https://api.timbu.cloud/images/${product.photos[modalImageIndex].url}`} alt={product.name} className='w-full h-full object-cover cursor-pointer' onClick={() => setShowProductImageModal(true)} />
                         </div>
 
                         <div className='w-full h-auto flex justify-between gap-[20px] items-center'>
                             <div className=' p-2 flex gap-2 '>
-                                {product.photos.slice(0, 3).map((photo, index) => (
+                                {product.photos.map((photo, index) => (
                                     <img
                                         key={index}
                                         src={`https://api.timbu.cloud/images/${photo.url}`}
@@ -189,26 +188,9 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                     onClose={() => setShowProductImageModal(false)}
                 />
             )}
+
         </div>
     );
 };
 
 export default Product;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

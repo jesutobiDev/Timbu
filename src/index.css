@@ -37,5 +37,17 @@ body {
 .blur-overlay:hover {
     filter: none;
     opacity: 1;
+}.fixed-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 1000;
 }
+
+
+
+
 
