@@ -1,49 +1,68 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Cart from "../../assets/icons/black-cart.svg";
 import { Link } from "react-router-dom";
 import { CartContext } from '../Context/CartContext';
-import products from '../../data';
 import Arrow from "../../assets/icons/arrow-forward.svg";
 import Shipping from "./Shipping";
 import Payment from './Payment';
-import Finalize from "./Finalize"
-import bars from "../../assets/icons/bars.svg"
-import close from "../../assets/icons/close.svg"
+import Finalize from "./Finalize";
+import bars from "../../assets/icons/bars.svg";
+import close from "../../assets/icons/close.svg";
+import { fetchProduct } from '../../services/fetchProduct';
+import CartItem from '../Cart/CartItem';
+import DefaultImage from "../../assets/images/about.png"
 
 const Checkout = ({ handleToggleNav, toggleNav }) => {
     const [activeSection, setActiveSection] = useState('shipping');
-    const { cart, removeFromCart } = useContext(CartContext);
-    const numberOfCartItems = cart.length;
+    const { cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } = useContext(CartContext);
+    const [products, setProducts] = useState([]);
 
-    const firstCartItemImage = numberOfCartItems > 0 ? products.find(p => p.id === cart[0].id)?.image : '';
+
+    useEffect(() => {
+        const fetchCartItems = async () => {
+            try {
+                const productDetails = await Promise.all(
+                    cart.map(async (item) => {
+                        const product = await fetchProduct(item.id);
+                        return {
+                            ...product,
+                            quantity: item.quantity,
+                            selectedColor: item.selectedColor,
+                        };
+                    })
+                );
+                setProducts(productDetails);
+            } catch (error) {
+                console.error('Error fetching product details:', error);
+            }
+        };
+
+        if (cart.length > 0) {
+            fetchCartItems();
+        } else {
+            setProducts([]);
+        }
+    }, [cart]);
+
+    const numberOfCartItems = cart.length;
+    const firstCartItemImage = numberOfCartItems > 0 ? products[0]?.photos[0]?.url : '';
 
     const calculateSubtotal = () => {
-        return cart.reduce((sum, item) => {
-            const product = products.find(p => p.id === item.id);
-            if (!product) return sum;
-
-            const price = parseInt(product.price);
-            const quantity = parseInt(item.quantity);
-
+        return products.reduce((sum, item) => {
+            const price = parseFloat(item.current_price);
+            const quantity = parseInt(item.quantity, 10);
             return sum + (price * quantity);
         }, 0);
     };
 
-    const handleRemoveFromCart = (id) => {
-        removeFromCart(id);
-    };
+
 
     const shippingFee = 20;
     const couponDiscount = 0;
     const subtotal = calculateSubtotal();
     const total = subtotal + shippingFee + couponDiscount;
 
-    const getRandomProductImage = () => {
-        const randomIndex = Math.floor(Math.random() * products.length);
-        return products[randomIndex].image;
-    };
 
-    const randomProductImage = getRandomProductImage();
 
     const renderSectionContent = () => {
         switch (activeSection) {
@@ -56,6 +75,19 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
             default:
                 return null;
         }
+    };
+
+
+    const handleRemoveFromCart = (id) => {
+        removeFromCart(id);
+    };
+
+    const handleIncreaseQuantity = (id) => {
+        increaseQuantity(id);
+    };
+
+    const handleDecreaseQuantity = (id) => {
+        decreaseQuantity(id);
     };
 
     return (
@@ -72,7 +104,7 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
                                 </div>
                             )}
                         </Link>
-                        <img src={bars} alt="bars" className='h-[16px] w-[24px] opacity-50 md:hidden  invert filter cursor-pointer' onClick={handleToggleNav} />
+                        <img src={bars} alt="bars" className='h-[16px] w-[24px] opacity-50 md:hidden invert filter cursor-pointer' onClick={handleToggleNav} />
                     </div>
                 </div>
                 <div className={`fixed top-0 right-0 bg-[#F3F2E8] md:bg-transparent md:items-center w-full h-full md:static md:w-auto md:flex md:justify-between md:flex-1 transition-transform duration-500 ease-in-out z-50 ${toggleNav ? 'transform translate-x-0' : 'transform translate-x-full md:transform-none'}`}>
@@ -102,7 +134,7 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
                 </div>
             </div>
             <div className='w-full h-[155px] md:h-[360px] rounded-[24px] my-10 relative overflow-hidden '>
-                <img src={numberOfCartItems > 0 ? firstCartItemImage : randomProductImage} alt="Cart Item" className='w-full h-full object-cover absolute inset-0' />
+            <img src={numberOfCartItems > 0 ? `https://api.timbu.cloud/images/${firstCartItemImage}` : DefaultImage} alt="Cart Item" className='w-full h-full object-cover absolute inset-0' />
                 <div className='bg-[#121211]/30 w-full h-full z-10 absolute p-12 flex items-end'>
                     <p className='text-[#F3F2E8] font-semibold text-[42px]'>Checkout</p>
                 </div>
@@ -136,55 +168,49 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
                     </div>
                     <div className=''>
                         <p className='text-[#121211] border-b-[1px] border-[#121211]/30 font-semibold text-[24px] h-[42px] leading-[8px]'>Cart Summary</p>
-                        <div>
-                            {cart.map((item, index) => {
-                                const product = products.find(p => p.id === item.id);
-                                if (!product) return null;
-                                return (
-                                    <div key={index} className='flex justify-between gap-[50px] items-center border-b-[1px] border-[#121211]/30 py-[20px] pb-[20px]'>
-                                        <div className='flex items-center gap-[20px]'>
-                                            <img src={product.image} alt={product.name} className='w-[100px] h-[100px] object-cover rounded-[12px]' />
-                                            <div>
-                                                <p className='font-semibold text-[14px] md:text-[20px]'>{product.name}</p>
-                                                <p className='text-[14px] md:text-[16px] text-gray-600'>Color: {item.selectedColor}</p>
-                                                <p className='text-[14px] md:text-[16px] text-gray-600'>Qty: {item.quantity}</p>
-                                                <p className='text-[14px] md:text-[20px] text-[#872009] font-light'>${product.price * item.quantity}</p>
-                                            </div>
-                                        </div>
-                                        <p className='cursor-pointer' onClick={() => handleRemoveFromCart(item.id)}>Remove</p>
-                                    </div>
-                                );
-                            })}
+                        <div className=' flex'>
+                            {products.map((product, index) => (
+                                <CartItem
+                                    key={index}
+                                    product={product}
+                                    handleDecreaseQuantity={handleDecreaseQuantity}
+                                    handleIncreaseQuantity={handleIncreaseQuantity}
+                                    handleRemoveFromCart={handleRemoveFromCart}
+                                />
+                            ))}
                         </div>
-                        <p className='text-[#121211] py-[20px] border-b-[1px] border-[#121211]/30 font-semibold text-[24px]'>Order Summary</p>
-                        <div className='flex mt-[20px] text-[18px] items-center justify-between '>
-                            <p>Subtotal</p>
-                            <p>${subtotal}</p>
+                        <div className='flex justify-between my-5'>
+                            <p className='text-[20px] md:text-[18px] text-[#121211]'>Subtotal</p>
+                            <p className='text-[20px] md:text-[18px] text-[#121211]'>₦ {subtotal.toFixed(2)}</p>
                         </div>
-                        <div className='flex mt-[20px] text-[18px] items-center justify-between '>
-                            <p>Shipping</p>
-                            <p>${shippingFee}</p>
+                        <div className='flex justify-between my-5'>
+                            <p className='text-[20px] md:text-[18px] text-[#121211]'>Shipping fee</p>
+                            <p className='text-[20px] md:text-[18px] text-[#121211]'>₦ {shippingFee.toFixed(2)}</p>
                         </div>
-                        <div className='flex mt-[20px] text-[18px] items-center justify-between border-b-[1px] border-[#121211]/30 pb-[10px] '>
-                            <p>Coupon Discount</p>
-                            <p>${couponDiscount}</p>
+                        <div className='flex justify-between my-5'>
+                            <p className='text-[20px] md:text-[18px] text-[#121211]'>Coupon Discount</p>
+                            <p className='text-[20px] md:text-[18px] text-[#121211]'>₦ {couponDiscount.toFixed(2)}</p>
                         </div>
-                        <div className='flex mt-[20px] font-bold text-[18px] items-center justify-between '>
-                            <p>Total</p>
-                            <p>${total}</p>
+                        <div className='flex justify-between my-5 border-t-[1px] pt-[10px] border-[#121211]'>
+                            <p className='font-semibold text-[20px] md:text-[18px] text-[#121211]'>Total</p>
+                            <p className='font-semibold text-[20px] md:text-[18px] text-[#121211]'>₦ {total.toFixed(2)}</p>
                         </div>
                     </div>
                 </div>
             ) : (
                 <div className='my-2 flex flex-col items-center gap-[15px]'>
-                    <p className='text-[#000000]/30 flex items-center justify-center font-semibold text-[24px]'>There are no items in your cart</p>
-                    <Link to="/listings" className='flex gap-[10px] font-semibold items-center justify-center border-[2px] border-[#121211] rounded-full w-fit px-[20px] py-[10px]'>
-                        <img src={Arrow} alt="arrow-back" className='rotate-180' />  Go back to product listings
+                    <p className='text-[#000000]/30 flex items-center justify-center font-semibold text-[24px] text-center'>
+                        There are no items in your cart
+                    </p>
+                    <Link
+                        to='/listings'
+                        className='flex gap-[10px] font-semibold items-center justify-center border-[2px] border-[#121211] rounded-full w-fit px-[20px] py-[10px]'>
+                        <img src={Arrow} alt='arrow-back' className='rotate-180' /> Go back to product listings
                     </Link>
                 </div>
             )}
         </div>
     );
-}
+};
 
 export default Checkout;
