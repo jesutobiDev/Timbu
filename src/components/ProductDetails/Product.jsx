@@ -205,7 +205,7 @@ const Product = ({ handleToggleNav, toggleNav }) => {
             <div className="flex-col md:flex-row flex justify-between text-[#121211] items-center gap-[30px]">
                 <p className="text-[32px] font-semibold ">Other products you might like</p>
             </div>
-            <div className="flex mt-[50px] justify-between flex-col md:flex-row gap-[20px]">
+            <div className="flex mt-[50px] justify-between flex-col md:flex-row gap-[20px] items-center">
                 {featuredProducts.slice(0, 3).map((product) => (
                     <Link to={`/products/${product.id}`} key={product.id} className='w-[350px] md:w-[230px] lg:w-[350px]'>
                         <div className=" h-[300px] rounded-[12px] overflow-hidden">
