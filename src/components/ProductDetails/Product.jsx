@@ -97,7 +97,7 @@ const Product = ({ handleToggleNav, toggleNav }) => {
     const numberOfCartItems = cart.length;
 
     return (
-        <div className={showProductImageModal ? 'fixed-container' : ''}>
+        <div className={showProductImageModal ? 'fixed-container' : 'w-screen overflow-hidden'}>
             <Navbar handleToggleNav={handleToggleNav} toggleNav={toggleNav} />
             <div className='my-10 flex flex-col lg:flex-row lg:gap-[100px] justify-between p-5 md:p-0 md:px-[50px] lg:py-5 lg:my-0'>
                 <div className='flex flex-col gap-[35px]'>
