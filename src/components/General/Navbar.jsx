@@ -9,7 +9,7 @@ const Navbar = ({ handleToggleNav, toggleNav }) => {
     const { cart } = useContext(CartContext);
     const numberOfCartItems = cart.length;
     return (
-        <div className="h-auto relative md:p-0 md:flex md:gap-10 md:px-[0] md:py-5 font-poppins md:items-center m-5 md:m-0 md:mx-[50px] md:my-10">
+        <div className="h-auto relative md:p-0 md:flex md:gap-10 md:px-[0] md:py-5 font-poppins md:items-center m-5 md:m-0 md:mx-[50px] md:my-2">
             <div className='w-full md:w-auto flex justify-between items-center h-20 md:h-16'>
                 <p className="text-[42px] font-semibold text-[#121211] ">Timbu</p>
                 <div className='flex gap-[20px] items-center'>

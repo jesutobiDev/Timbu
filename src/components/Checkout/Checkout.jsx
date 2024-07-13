@@ -5,11 +5,11 @@ import Arrow from "../../assets/icons/arrow-forward.svg";
 import Shipping from "./Shipping";
 import Payment from './Payment';
 import Finalize from "./Finalize";
-import Navbar from '../General/Navbar';
+import Header from './Header';
 
 import { fetchProduct } from '../../services/fetchProduct';
 import CartItem from '../Cart/CartItem';
-import DefaultImage from "../../assets/images/about.png"
+
 
 const Checkout = ({ handleToggleNav, toggleNav }) => {
     const [activeSection, setActiveSection] = useState('shipping');
@@ -90,17 +90,10 @@ const Checkout = ({ handleToggleNav, toggleNav }) => {
     };
 
     return (
-        <div className='p-5 md:p-0 md:px-[50px] md:py-5 text-wrap w-full'>
-            <Navbar handleToggleNav={handleToggleNav} toggleNav={toggleNav} />
-
-            <div className='w-full h-[155px] md:h-[360px] rounded-[24px] my-10 relative overflow-hidden '>
-                <img src={numberOfCartItems > 0 ? `https://api.timbu.cloud/images/${firstCartItemImage}` : DefaultImage} alt="Cart Item" className='w-full h-full object-cover absolute inset-0' />
-                <div className='bg-[#121211]/30 w-full h-full z-10 absolute p-12 flex items-end'>
-                    <p className='text-[#F3F2E8] font-semibold text-[42px]'>Checkout</p>
-                </div>
-            </div>
+        <div className='w-full'>
+            <Header handleToggleNav={handleToggleNav} toggleNav={toggleNav} />
             {numberOfCartItems > 0 ? (
-                <div className='flex flex-col-reverse lg:flex-row gap-[30px] justify-between mb-[20px]'>
+                <div className='flex flex-col-reverse lg:flex-row gap-[30px] justify-between mb-[20px] p-5 md:p-0 md:px-[50px] md:py-5 text-wrap w-full'>
                     <div className="flex-1">
                         <div className="flex gap-5 border-b-[1px] border-[#121211]/20 h-[42px]">
                             <div className='cursor-pointer'>

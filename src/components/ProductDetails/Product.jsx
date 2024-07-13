@@ -100,7 +100,7 @@ const Product = ({ handleToggleNav, toggleNav }) => {
     return (
         <div>
             <Navbar handleToggleNav={handleToggleNav} toggleNav={toggleNav} />
-            <div className='my-10 flex flex-col lg:flex-row lg:gap-[100px] justify-between p-5 md:p-0 md:px-[50px] lg:py-5'>
+            <div className='my-10 flex flex-col lg:flex-row lg:gap-[100px] justify-between p-5 md:p-0 md:px-[50px] lg:py-5 lg:my-0'>
                 <div className='flex flex-col gap-[35px]'>
                     <Link to="/listings" className='flex gap-1 font-bold'>
                         <img src={Arrow} alt="arrow-back" className='rotate-180' /> Back to lists
@@ -166,7 +166,7 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                 <div className="flex-col md:flex-row flex justify-between text-[#121211] items-center gap-[30px]">
                     <p className="text-[32px] font-semibold ">Other products you might like</p>
                 </div>
-                <div className="flex mt-[50px] justify-between flex-col md:flex-row gap-[20px]">
+                <div className="flex mt-[50px] justify-between flex-col md:flex-row gap-[20px] items-center md:items-start">
                     {featuredProducts.slice(0, 3).map((product) => (
                         <Link to={`/products/${product.id}`} key={product.id} className='w-[350px] md:w-[230px] lg:w-[350px]'>
                             <div className=" h-[300px] rounded-[12px] overflow-hidden">

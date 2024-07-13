@@ -38,8 +38,8 @@ const Discover = () => {
                     <img src={arrowForward} alt="arrow-forward w-10 h-10" />
                 </Link>
             </div>
-            <div className="flex mt-[50px] justify-between flex-col md:flex-row  gap-[20px] items-center">
-                {featuredProducts.slice(0, 3).map((product, index) => (
+            <div className="flex mt-[50px] justify-between flex-col md:flex-row  gap-[20px] items-center md:items-start">
+                {featuredProducts.slice(0, 3).map((product) => (
                     <Link to={`/products/${product.id}`} key={product.id} className='w-[350px] md:w-[230px] lg:w-[350px]'>
                         <div className=" h-[300px] rounded-[12px] overflow-hidden">
                             <img src={`https://api.timbu.cloud/images/${product.image}`} alt={product.name} className="w-full h-full object-cover" />
