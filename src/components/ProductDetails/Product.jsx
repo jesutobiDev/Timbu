@@ -133,7 +133,7 @@ const Product = ({ handleToggleNav, toggleNav }) => {
                 </div>
                 <div className='md:mt-[50px] lg:mt-[30px] mt-[50px] lg:w-[75%]'>
                     <div className='flex flex-col gap-[20px]'>
-                        <div className='lg:w-[500px] lg:h-[450px] bg-red-600 lg:h-auto  w-full h-[360px] rounded-[12px] object-cover overflow-hidden'>
+                        <div className='lg:w-[500px] lg:h-[450px]  w-full h-[360px] rounded-[12px] object-cover overflow-hidden'>
                             <img src={`https://api.timbu.cloud/images/${product.photos[modalImageIndex].url}`} alt={product.name} className='w-full h-full object-cover cursor-pointer' onClick={() => setShowProductImageModal(true)} />
                         </div>
 
