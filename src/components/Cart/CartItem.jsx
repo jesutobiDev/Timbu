@@ -1,7 +1,4 @@
-// src/components/CartItem.js
 import React from 'react';
-import PropTypes from 'prop-types';
-
 
 const CartItem = ({ product, handleDecreaseQuantity, handleIncreaseQuantity, handleRemoveFromCart }) => {
     return (
@@ -43,11 +40,6 @@ const CartItem = ({ product, handleDecreaseQuantity, handleIncreaseQuantity, han
     );
 };
 
-CartItem.propTypes = {
-    product: PropTypes.object.isRequired,
-    handleDecreaseQuantity: PropTypes.func.isRequired,
-    handleIncreaseQuantity: PropTypes.func.isRequired,
-    handleRemoveFromCart: PropTypes.func.isRequired,
-};
+
 
 export default CartItem;

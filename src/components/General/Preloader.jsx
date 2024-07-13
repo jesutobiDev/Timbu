@@ -1,5 +1,5 @@
 import React from 'react';
-import Hero from "../assets/images/hero.svg"
+import Hero from "../../assets/images/hero.svg"
 
 const Preloader = () => {
   return (

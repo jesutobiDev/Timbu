@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './Header'
 import Discover from "./Discover"
 import About from './About'
-import Footer from '../Footer'
+import Footer from '../General/Footer'
 
 const Homepage = ({handleToggleNav, toggleNav}) => {
   return (

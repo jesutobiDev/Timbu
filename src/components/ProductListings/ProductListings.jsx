@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import Products from './Products'
-import Footer from '../Footer'
+import Footer from '../General/Footer'
 
 const ProductListings = ({ handleToggleNav, toggleNav }) => {
     return (

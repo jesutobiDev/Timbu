@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import Preloader from './components/Preloader';
+import Preloader from './components/General/Preloader';
 import Homepage from "./components/Homepage/Homepage";
 import ProductListings from "./components/ProductListings/ProductListings";
 import Product from "./components/ProductDetails/Product";
